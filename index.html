@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Pomodoro app</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <main id="container">
+    <nav class = 'title'>Pomodoro timer</nav>
+
+    <div class="mode">
+      <button class="modeButton">Work</button>
+      <button class="modeButton">Short break</button>
+      <button class="modeButton">Long break</button>
+    </div>
+    <div id="pomodoro">
+      <div class="time"></div>
+    </div>
+
+    <div class="controls">
+    <button class ="control play"><img src="play.png"></button>
+      <button class ="control skip"><img src="skip.png"></button>
+    </div>
+
+    <div class="sessions">
+      <div class = "session">Work sessions<span class="workSessions"></span></div>
+      <div class = "session">Break sessions<span class="breakSessions"></span></div>
+    </div>
+  </main>
+  
+
+
+<script src = "app.js"></script>
+
+</body>
+
+</html>
