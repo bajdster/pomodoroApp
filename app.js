@@ -127,12 +127,19 @@ function modeSwitch(modeCase)
 
 function setMode()
 {
-    modeButtons.forEach(button=>button.classList.remove("modeActive"));
-    this.classList.add("modeActive");
-    play.innerHTML = `<img src ="play.png">`
-    timerPlayed = false;
-    modeSwitch(this.innerHTML)
-    pomodoro.style.background = "rgb(172, 44, 44)";
+    if(timerPlayed)
+    {
+        wantNextMode = confirm("Are you sure?")
+    }
+    if(wantNextMode)
+    {
+        modeButtons.forEach(button=>button.classList.remove("modeActive"));
+        this.classList.add("modeActive");
+        play.innerHTML = `<img src ="play.png">`
+        timerPlayed = false;
+        modeSwitch(this.innerHTML)
+        pomodoro.style.background = "rgb(172, 44, 44)";
+    }
 }
 
 function changeMode(text)
