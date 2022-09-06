@@ -17,7 +17,7 @@ let wantNextMode = true;
 
 let workTimes = 0;
 let breakTimes = 0;
-
+let degree = 360;
 
 
 function startApp()
@@ -35,7 +35,6 @@ function startApp()
 function countTime()
 {
     let startTimeArr = time.innerHTML.split(":");
-    let degree = 360;
     let timeSec = Number(startTimeArr[0])*60+Number(startTimeArr[1])
 
     if(timerPlayed == false)
@@ -99,6 +98,7 @@ function countTime()
 
 function modeSwitch(modeCase)
 {
+    degree = 360;
     switch(modeCase)
     {
         case "Work":
