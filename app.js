@@ -1,3 +1,4 @@
+
 const pomodoro = document.querySelector("#pomodoro");
 const play = document.querySelector(".play");
 const skip = document.querySelector(".skip");
@@ -19,49 +20,72 @@ let workTimes = 0;
 let breakTimes = 0;
 let degree = 360;
 
+let timeSec;
+
+
 
 function startApp()
 {
     modeButtons[0].classList.add("modeActive");
     currentClass = "workCol"
     body.classList.add(currentClass);
-    time.innerHTML = "25:00" //25;
+    time.innerHTML = "01:00" //25;
     workSessions.innerHTML = workTimes
     breakSessions.innerHTML = breakTimes
+    setTimeSec();
 }
 
+
+function setTimeSec()
+{
+    let splittedTime = time.innerHTML.split(":");
+    timeSec = Number(splittedTime[0])*60+Number(splittedTime[1])
+}
 
 
 function countTime()
 {
     let startTimeArr = time.innerHTML.split(":");
-    let timeSec = Number(startTimeArr[0])*60+Number(startTimeArr[1])
+
+    let endMs = Date.now()+ (Number(startTimeArr[0]*60)+ Number(startTimeArr[1]))*1000;
+    
+    // let timeSec = Number(startTimeArr[0])*60+Number(startTimeArr[1])
 
     if(timerPlayed == false)
     {
         counter = setInterval(() => 
         {   
+            //THERE IS A HOPE BUT FIND OUT HOW TO REACT ON TIME OUT
+            //
+            //
+            //
+            //
+
+            let timeLeft = Math.round((endMs - Date.now())/1000);
+
+            console.log(timeLeft)
+            let minutes = Math.floor(timeLeft/60);
+            let seconds = Math.floor(timeLeft%60);
+
+
             //changing cirle progress color
             let bodyColor = window.getComputedStyle(body).getPropertyValue("background-color")
             degree = degree-(360/timeSec);
             pomodoro.style.background = `conic-gradient(rgb(172, 44, 44) ${degree}deg,
             ${bodyColor} ${degree}deg)`
            
-            startTimeArr[1]--;
-            if(startTimeArr[1]<0)
+            if(seconds<10)
             {
-                startTimeArr[1]=59
-                startTimeArr[0]--;
-            }
-            if(startTimeArr[1]<10)
-            {
-                startTimeArr[1] = "0"+ startTimeArr[1]
+                seconds = "0"+ seconds
             }
 
-            time.innerHTML = `${startTimeArr[0]}:${startTimeArr[1]}`
+            time.innerHTML = `${minutes}:${seconds}`
+
 
             //end of this. Must be in this order to skipMode works
-            if(startTimeArr[0]<=0 && startTimeArr[1]<=0)
+
+            //now works but timeleft doesn't minus regularly f.e 154, 94, 34, -26
+            if(timeLeft <= 0)
             {
                 if(currentClass == "workCol")
                 {
@@ -78,8 +102,6 @@ function countTime()
                 clearInterval(counter);   
                 const ring = new Audio("ring.mp3")
                 ring.play()
-
-                
 
             }
         }, 1000);
@@ -102,25 +124,31 @@ function modeSwitch(modeCase)
     switch(modeCase)
     {
         case "Work":
+            
             clearInterval(counter)
             time.innerHTML = "25:00";
             body.classList.replace(currentClass, "workCol");
             currentClass = "workCol";
             currentIndex = 0;
+            setTimeSec()
             break;
         case "Short break":
+            
             clearInterval(counter);
             time.innerHTML = "05:00";
             body.classList.replace(currentClass, "sbreakCol");
             currentClass = "sbreakCol";
             currentIndex = 1;
+            setTimeSec()
             break;
         case "Long break":
+            
             clearInterval(counter);
             time.innerHTML = "15:00";
             body.classList.replace(currentClass, "lbreakCol");
             currentClass = "lbreakCol";
             currentIndex = 2;
+            setTimeSec()
             break;
     }
 }
