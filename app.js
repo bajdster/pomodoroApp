@@ -55,11 +55,6 @@ function countTime()
     {
         counter = setInterval(() => 
         {   
-            //THERE IS A HOPE BUT FIND OUT HOW TO REACT ON TIME OUT
-            //
-            //
-            //
-            //
 
             let timeLeft = Math.round((endMs - Date.now())/1000);
 
@@ -83,8 +78,6 @@ function countTime()
 
 
             //end of this. Must be in this order to skipMode works
-
-            //now works but timeleft doesn't minus regularly f.e 154, 94, 34, -26
             if(timeLeft <= 0)
             {
                 if(currentClass == "workCol")
