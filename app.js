@@ -29,7 +29,7 @@ function startApp()
     modeButtons[0].classList.add("modeActive");
     currentClass = "workCol"
     body.classList.add(currentClass);
-    time.innerHTML = "01:00" //25;
+    time.innerHTML = "25:00" //25;
     workSessions.innerHTML = workTimes
     breakSessions.innerHTML = breakTimes
     setTimeSec();
